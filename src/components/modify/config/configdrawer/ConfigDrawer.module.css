@@ -1,0 +1,50 @@
+.tipo,
+.clave {
+    width: 80px;
+}
+
+.concepto {
+    flex-grow: 1;
+}
+
+.exento,
+.eliminar {
+    width: 60px;
+    vertical-align: middle;
+}
+
+.sectionHeader {
+    margin-bottom: 0;
+}
+
+.sectionHeaderContainer {
+    margin-bottom: 5px;
+}
+
+.btnAdd {
+    margin-left: auto;
+}
+
+.dragHandle,
+.dragHandleHeader {
+    width: 20px;
+}
+
+.dragHandleHeader {
+    margin-top: 4px;
+    margin-left: 5px
+}
+
+.itemControlGroup {
+    margin-bottom: 5px
+}
+
+.configCard {
+    margin-bottom: 10px;
+}
+
+.configLabel {
+    margin-bottom: 0;
+    margin-right: 15px;
+    width: 200px;
+}

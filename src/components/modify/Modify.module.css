@@ -1,0 +1,46 @@
+.mainContainer {
+    display: flex;
+}
+
+.mono {
+    font-family: monospace;
+}
+
+.rfc {
+    width: 150px;
+    display: inline-block;
+    border-right: 1px solid #848f99;
+    padding-bottom: 18px;
+}
+
+.container {
+    overflow-x: scroll;
+    white-space: nowrap;
+    display: inline-block;
+    width: calc(100% - 150px);
+    padding-bottom: 18px;
+}
+
+
+.element {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.label {
+    background-color: #f8f9fa;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.label:not(:hover) {
+    text-overflow: ellipsis;
+}
+
+.label>span {
+    position: relative;
+    left: 0px;
+    width: 100%;
+    transform: translateX(0%);
+    transition: left .25s ease;
+}

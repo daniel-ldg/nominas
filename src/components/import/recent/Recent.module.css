@@ -1,0 +1,41 @@
+.recentDialog {
+    min-width: 800px;
+    padding-bottom: 0
+}
+
+.recentDialogPanel {
+    height: 300px;
+    overflow: auto;
+    min-width: 250px;
+    position: relative;
+}
+
+.label {
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+}
+
+.favoriteIcon {
+    position: absolute;
+}
+
+.footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.footerSection {
+    display: flex;
+    align-items: center;
+}
+
+.nominasList {
+    height: 128px;
+    overflow: auto;
+}
+
+.nominaListItem {
+    cursor: default !important;
+}
