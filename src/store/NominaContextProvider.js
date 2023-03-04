@@ -26,23 +26,22 @@ const dataIsValid = data => {
 const configReducer = (prevState, action) => {
 	switch (action.type) {
 		case ACTIONS.CHANGE_CONFIG:
-			let keepData = prevState.id === action.newConfig.id;
 			action.newConfig.percepciones.forEach((percepcion, i) => {
 				percepcion.id = i;
-				percepcion.dataGravado = keepData ? percepcion.dataGravado || "" : "";
-				percepcion.dataExento = keepData ? percepcion.dataExento || "" : "";
+				percepcion.dataGravado = percepcion.dataGravado || "";
+				percepcion.dataExento = percepcion.dataExento || "";
 				percepcion.dataGravadoIsValid = dataIsValid(percepcion.dataGravado);
 				percepcion.dataExentoIsValid = dataIsValid(percepcion.dataExento);
 				percepcion.exento = percepcion.exento || false;
 			});
 			action.newConfig.otrospagos.forEach((otropago, i) => {
 				otropago.id = i;
-				otropago.data = keepData ? otropago.data || "" : "";
+				otropago.data = otropago.data || "";
 				otropago.dataIsValid = dataIsValid(otropago.data);
 			});
 			action.newConfig.deducciones.forEach((deduccion, i) => {
 				deduccion.id = i;
-				deduccion.data = keepData ? deduccion.data || "" : "";
+				deduccion.data = deduccion.data || "";
 				deduccion.dataIsValid = dataIsValid(deduccion.data);
 			});
 			return action.newConfig;
