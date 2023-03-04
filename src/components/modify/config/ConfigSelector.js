@@ -78,7 +78,15 @@ const ConfigSelector = props => {
 	};
 
 	const saveCustomConfig = config => {
-		localStorageCtx.onSaveCustomConfig(config);
+		const configNoData = {
+			...config,
+			percepciones: config.percepciones.map(
+				({ dataExento, dataExentoIsValid, dataGravado, dataGravadoIsValid, ...noData }) => noData
+			),
+			otrospagos: config.otrospagos.map(({ data, dataIsValid, ...noData }) => noData),
+			deducciones: config.deducciones.map(({ data, dataIsValid, ...noData }) => noData),
+		};
+		localStorageCtx.onSaveCustomConfig(configNoData);
 		props.onSetConfig(config);
 	};
 
