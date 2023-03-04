@@ -1,5 +1,6 @@
 import { AnchorButton, Button, ButtonGroup } from "@blueprintjs/core";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { LocalStorageContext } from "../../../store/LocalStorageContext";
 import ConfigDrawer from "./configdrawer/ConfigDrawer";
 
 const SUBSIDIO_EMPLEO = [
@@ -60,6 +61,7 @@ let CONFIGS = {
 
 const ConfigSelector = props => {
 	const [isSettingUp, setIsSettingUp] = useState(false);
+	const localStorageCtx = useContext(LocalStorageContext);
 
 	useEffect(() => {
 		props.onSetConfig(CONFIGS.NORMAL);
@@ -67,6 +69,18 @@ const ConfigSelector = props => {
 
 	const showSettingUp = () => setIsSettingUp(true);
 	const hideSettingUp = () => setIsSettingUp(false);
+
+	const loadCustomConfig = () => {
+		if (props.current.id !== CONFIG_ID.PERSONALIZADA) {
+			let config = localStorageCtx.onGetCustomConfig() || CONFIGS.PERSONALIZADA;
+			props.onSetConfig(config);
+		}
+	};
+
+	const saveCustomConfig = config => {
+		localStorageCtx.onSaveCustomConfig(config);
+		props.onSetConfig(config);
+	};
 
 	return (
 		<ButtonGroup fill>
@@ -84,14 +98,11 @@ const ConfigSelector = props => {
 				active={props.current.id === CONFIG_ID.EXTRAORDINARIA}>
 				Extraordinaria
 			</Button>
-			<Button
-				fill
-				onClick={() => (props.current.id !== CONFIG_ID.PERSONALIZADA ? props.onSetConfig(CONFIGS.PERSONALIZADA) : null)}
-				active={props.current.id === CONFIG_ID.PERSONALIZADA}>
+			<Button fill onClick={loadCustomConfig} active={props.current.id === CONFIG_ID.PERSONALIZADA}>
 				Personalizada
 			</Button>
 			<AnchorButton icon='settings' disabled={props.current.id !== CONFIG_ID.PERSONALIZADA} onClick={showSettingUp} />
-			<ConfigDrawer isOpen={isSettingUp} onHide={hideSettingUp} config={props.current} onSaveConfig={props.onSetConfig} />
+			<ConfigDrawer isOpen={isSettingUp} onHide={hideSettingUp} config={props.current} onSaveConfig={saveCustomConfig} />
 		</ButtonGroup>
 	);
 };

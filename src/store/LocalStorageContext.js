@@ -7,7 +7,13 @@ export const LocalStorageContext = React.createContext({
 	removeSavedImport: id => {},
 	onSetImportFavorite: (isFavorite, id) => {},
 	renameImport: (label, id) => {},
+	onSaveCustomConfig: config => {},
+	onGetCustomConfig: () => {},
 });
+
+const CUSTOM_CONFIG_KEY = "custom_config";
+const saveConfig = data => localStorage.setItem(CUSTOM_CONFIG_KEY, JSON.stringify(data));
+const getConfig = () => JSON.parse(localStorage.getItem(CUSTOM_CONFIG_KEY));
 
 const sortFavoriteLastUsed = (a, b) => {
 	const aBeforeB = -1;
@@ -96,6 +102,8 @@ export const LocalStorageContextProvider = ({ children }) => {
 				onSetImportFavorite: (isFavorite, id) =>
 					importsDispatch({ type: IMPORTS_ACTIONS.SET_IMPORT_FAVORITE, id: id, isFavorite: isFavorite }),
 				renameImport: (label, id) => importsDispatch({ type: IMPORTS_ACTIONS.RENAME_IMPORT, label: label, id: id }),
+				onGetCustomConfig: getConfig,
+				onSaveCustomConfig: saveConfig,
 			}}>
 			{children}
 		</LocalStorageContext.Provider>
