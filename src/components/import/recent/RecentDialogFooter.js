@@ -6,7 +6,7 @@ import styles from "./Recent.module.css";
 const RecentDialogFooter = ({ lastUsed, id, onImport }) => {
 	const [relativeLastUsed, setRelativeLastUsed] = useState();
 
-	const updateRelativeLastUsed = () => setRelativeLastUsed(timeDifference(Date.now(), lastUsed));
+	const updateRelativeLastUsed = () => setRelativeLastUsed(timeDifference(lastUsed));
 
 	useEffect(() => {
 		if (!lastUsed) {
