@@ -2,7 +2,7 @@ import { Button, Dialog, DialogBody, NonIdealState, Spinner } from "@blueprintjs
 import { useEffect, useState } from "react";
 import Timeline from "../ui/timeline/Timeline";
 
-const token = "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";
+const token = "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";
 const url = "https://api.github.com/repos/daniel-ldg/nominas/commits";
 
 const VersionControlModal = ({ isOpen, onClose }) => {
