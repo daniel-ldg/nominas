@@ -2,10 +2,7 @@ import { Button, Dialog, DialogBody, NonIdealState, Spinner } from "@blueprintjs
 import { useEffect, useState } from "react";
 import Timeline from "../ui/timeline/Timeline";
 
-const token = atob(
-	"Z2l0aHViX3BhdF8xMUFFQU1TMlEwVmpuQzl5RlViM2R5X3B5RTFrYWNPNWdhOE5PNDhrNjFvcTZ2ZFJEbWQxaEF6ODQ1UUdTTzFUcVI2T1lVQ0ZXU0lIeWdGQXJo"
-);
-const url = "https://api.github.com/repos/daniel-ldg/nominas/commits";
+const url = "/commits.json";
 
 const VersionControlModal = ({ isOpen, onClose }) => {
 	const [response, setResponse] = useState({});
@@ -20,12 +17,7 @@ const VersionControlModal = ({ isOpen, onClose }) => {
 
 	const doRequest = () => {
 		setResponse({});
-		fetch(url, {
-			headers: {
-				Accept: "application/vnd.github+json",
-				Authorization: `Bearer ${token}`,
-			},
-		})
+		fetch(url)
 			.then(res => (res.ok ? res.json() : Promise.reject("Error en petición")))
 			.then(
 				data => setResponse({ data: data }),
