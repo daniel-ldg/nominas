@@ -2,7 +2,7 @@ import { Button, Dialog, DialogBody, NonIdealState, Spinner } from "@blueprintjs
 import { useEffect, useState } from "react";
 import Timeline from "../ui/timeline/Timeline";
 
-const url = "/commits.json";
+const url = "commits.json";
 
 const VersionControlModal = ({ isOpen, onClose }) => {
 	const [response, setResponse] = useState({});

@@ -8,8 +8,8 @@ const VersionControlButton = props => {
 	return (
 		<>
 			<VersionControlModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
-			<Button className={Classes.MINIMAL} icon='git-branch' onClick={() => setIsOpen(true)}>
-				{!props.isCompact && <Text className={Classes.TEXT_MUTED}>2.0.0b</Text>}
+			<Button className={Classes.MINIMAL} icon="git-branch" onClick={() => setIsOpen(true)}>
+				{!props.isCompact && <Text className={Classes.TEXT_MUTED}>2.1b</Text>}
 			</Button>
 		</>
 	);
