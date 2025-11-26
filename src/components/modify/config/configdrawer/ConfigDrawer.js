@@ -1,4 +1,4 @@
-import { Classes, Drawer, DrawerSize, Icon, Position } from "@blueprintjs/core";
+import { Button, Classes, Drawer, DrawerSize, Icon, Intent, Position } from "@blueprintjs/core";
 import { useState } from "react";
 import { ToasterSingleton } from "../../../../utils/ToasterSingleton";
 import DeduccionesConfig from "./DeduccionesConfig";
@@ -19,7 +19,7 @@ const ConfigDrawer = ({ isOpen, config, onHide, onSaveConfig }) => {
 		setDeducciones(config.deducciones);
 	};
 
-	const saveAndClose = () => {
+	const saveConfig = () => {
 		let newConfig = { ...config };
 		newConfig.percepciones = percepciones;
 		newConfig.otrospagos = otrospagos;
@@ -38,7 +38,7 @@ const ConfigDrawer = ({ isOpen, config, onHide, onSaveConfig }) => {
 			size={DrawerSize.LARGE}
 			title={"Configuración personalizada"}
 			onOpening={loadConfig}
-			onClosing={saveAndClose}>
+			onClosing={saveConfig}>
 			<div className={Classes.DRAWER_BODY}>
 				<div className={Classes.DIALOG_BODY}>
 					<OpcionesConfig opciones={opciones} onChange={setOpciones} />
@@ -47,8 +47,16 @@ const ConfigDrawer = ({ isOpen, config, onHide, onSaveConfig }) => {
 					<DeduccionesConfig deducciones={deducciones} onUpdate={setDeducciones} />
 				</div>
 			</div>
-			<div className={`${Classes.DRAWER_FOOTER} ${Classes.TEXT_MUTED}`}>
-				<Icon icon={"info-sign"}></Icon> Cerrar para aplicar los cambios
+			<div className={Classes.DRAWER_FOOTER}>
+				<Button
+					fill
+					intent={Intent.PRIMARY}
+					onClick={() => {
+						saveConfig();
+						onHide();
+					}}>
+					Guardar cambios
+				</Button>
 			</div>
 		</Drawer>
 	);
