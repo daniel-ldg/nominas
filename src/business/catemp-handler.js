@@ -55,8 +55,24 @@ const PERCEPCION_HEADER = [
 	"[Importe Gravado]",
 	"[Importe Exento]",
 ];
-const HORAS_EXTRA_HEADER = ["", "", "", "[Horas extra]", "[Tipo de horas]", "[Días]", "[Horas extra]", "[Importe pagado]"];
-const ACCIONES_Y_TITULOS_HEADER = ["", "", "", "[Acciones y títulos]", "[Valor en el mercado]", "[Precio al otorgarse]"];
+const HORAS_EXTRA_HEADER = [
+	"",
+	"",
+	"",
+	"[Horas extra]",
+	"[Tipo de horas]",
+	"[Días]",
+	"[Horas extra]",
+	"[Importe pagado]",
+];
+const ACCIONES_Y_TITULOS_HEADER = [
+	"",
+	"",
+	"",
+	"[Acciones y títulos]",
+	"[Valor en el mercado]",
+	"[Precio al otorgarse]",
+];
 const JUBILACION_HEADER = [
 	"",
 	"",
@@ -88,7 +104,13 @@ const COMPENSACION_SALDO_A_FAVOR_HEADER = [
 	"[Año]",
 	"[Remantente saldo a favor]",
 ];
-const INCAPACIDAD_HEADER = ["", "[Incapacidad]", "[Días de incapacidad]", "[Tipo de incapacidad]", "[Importe monetario]"];
+const INCAPACIDAD_HEADER = [
+	"",
+	"[Incapacidad]",
+	"[Días de incapacidad]",
+	"[Tipo de incapacidad]",
+	"[Importe monetario]",
+];
 const BEGINNING_NOMINA_1_2 = ["nomina12"];
 const BEGINNING_PERCEPCION = ["", "", "percepcion"];
 const BEGINNING_DEDUCCION = ["", "deduccion"];
@@ -453,7 +475,10 @@ class Nomina12 {
 		if (this.otrosPagos.length !== 0) {
 			output.push(OTROS_PAGOS_HEADER);
 			this.otrosPagos.forEach(otroPago => {
-				output.push([...BEGINNING_OTRO_PAGO, ...[otroPago.tipo, otroPago.clave, otroPago.concepto, otroPago.importe]]);
+				output.push([
+					...BEGINNING_OTRO_PAGO,
+					...[otroPago.tipo, otroPago.clave, otroPago.concepto, otroPago.importe],
+				]);
 				if (otroPago.tipo === "'002") {
 					// Si el valor de Nomina.OtrosPagos.OtroPago.TipoOtroPago es 002 es obligatorio el nodo SubsidioAlEmpleo.
 					if (this.subsidioAlEmpleo !== undefined) {
@@ -469,7 +494,17 @@ class Nomina12 {
 		return output;
 	};
 
-	toCSV = () => this.toArrays().map(array => '"' + array.join('","') + '"\r\n');
+	toCSV = () => {
+		const arrays = this.toArrays();
+		let csvContent = "";
+		arrays.forEach((array, index) => {
+			csvContent += array.join(",");
+			if (index < arrays.length - 1) {
+				csvContent += "\r\n";
+			}
+		});
+		return csvContent;
+	};
 
 	clone = () =>
 		new Nomina12()

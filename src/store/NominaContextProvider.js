@@ -66,7 +66,9 @@ const configReducer = (prevState, action) => {
 
 		case ACTIONS.UPDATE_OTROPAGO_DATA: {
 			let updatedData = prevState.otrospagos.map(otropago =>
-				otropago.id === action.id ? { ...otropago, data: action.data, dataIsValid: dataIsValid(action.data) } : otropago
+				otropago.id === action.id
+					? { ...otropago, data: action.data, dataIsValid: dataIsValid(action.data) }
+					: otropago
 			);
 			return { ...prevState, otrospagos: updatedData };
 		}
@@ -213,10 +215,10 @@ const NominaContextProvider = props => {
 		return nominas;
 	};
 
-	const onGetCsvHandler = () =>
-		getFilledNominas()
-			.map(nomina => nomina.toCSV())
-			.join();
+	const onGetCsvHandler = () => {
+		const filledNominas = getFilledNominas(); // ok
+		return filledNominas.map(nomina => nomina.toCSV()).join("\r\n");
+	};
 
 	const onSetCurrentTabHandler = newTabId => {
 		/*switch (newTabId) {
