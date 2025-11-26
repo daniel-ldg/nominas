@@ -1,3 +1,4 @@
 .editable {
     width: 140px;
+    white-space: pre-line;
 }

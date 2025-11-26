@@ -20,9 +20,11 @@ const EditableList2 = props => {
 		setSpanStyle({});
 	};
 
-	const saveValueHandler = newValue => {
-		const lineLimitedValue = newValue.split("\n").slice(0, props.lines).join("\n");
-		props.onSaveData(lineLimitedValue);
+	const formatAndSave = newValue => {
+		const lines = newValue.split(/\r?\n/); // handles "\n" and "\r\n"
+		const formated = lines.map(str => parseFloat(str.replace(/[^\d.]/g, "")).toFixed(2));
+		const limited = formated.slice(0, props.lines).join("\n");
+		props.onSaveData(limited);
 	};
 
 	return (
@@ -48,9 +50,10 @@ const EditableList2 = props => {
 				placeholder={"Modificar"}
 				selectAllOnFocus={true}
 				value={props.value}
-				onChange={saveValueHandler}
+				onChange={props.onSaveData}
 				disabled={props.disabled}
 				ref={props.innerRef}
+				onConfirm={formatAndSave}
 			/>
 		</div>
 	);
