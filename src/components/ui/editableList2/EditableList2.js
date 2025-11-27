@@ -21,9 +21,18 @@ const EditableList2 = props => {
 	};
 
 	const formatAndSave = newValue => {
-		const lines = newValue.split(/\r?\n/); // handles "\n" and "\r\n"
-		const formated = lines.map(str => parseFloat(str.replace(/[^\d.]/g, "")).toFixed(2));
-		const limited = formated.slice(0, props.lines).join("\n");
+		const lines = newValue.split(/\r?\n/);
+
+		const formatted = lines.map(str => {
+			const cleaned = str.replace(/[^\d.]/g, ""); // keep digits + dot
+
+			// If cleaned is empty or not a valid number → keep blank
+			if (!cleaned || isNaN(cleaned)) return "";
+
+			return parseFloat(cleaned).toFixed(2);
+		});
+
+		const limited = formatted.slice(0, props.lines).join("\n");
 		props.onSaveData(limited);
 	};
 
